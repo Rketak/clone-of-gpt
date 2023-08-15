@@ -2,7 +2,7 @@ import bot from './assets/bot.svg'
 import user from './assets/user.svg'
 
 const form = document.querySelector('form')
-const chatContainer = document.querySelector('#chat_container')
+const chatContainer = document.querySelector('#ChatContainer')
 
 // at loading
 let loadInterval
@@ -88,7 +88,7 @@ const handleSubmit = async (e) => {
     // messageDiv.innerHTML = "..."
     loader(messageDiv)
 
-    const response = await fetch('https:locolhost:8000', {
+    const response = await fetch('https://clone-of-gpt.onrender.com', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
