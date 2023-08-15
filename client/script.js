@@ -4,6 +4,7 @@ import user from './assets/user.svg'
 const form = document.querySelector('form')
 const chatContainer = document.querySelector('#chat_container')
 
+// at loading
 let loadInterval
 
 function loader(element) {
@@ -20,6 +21,7 @@ function loader(element) {
     }, 300);
 }
 
+// At typing
 function typeText(element, text) {
     let index = 0
 
@@ -65,17 +67,17 @@ function chatStripe(isAi, value, uniqueId) {
 const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const data = new FormData(form)
+    const data = new FormData(form);
 
     // user's chatstripe
-    chatContainer.innerHTML += chatStripe(false, data.get('prompt'))
+    chatContainer.innerHTML += chatStripe(false, data.get('prompt'));
 
     // to clear the textarea input 
     form.reset()
 
     // bot's chatstripe
     const uniqueId = generateUniqueId()
-    chatContainer.innerHTML += chatStripe(true, " ", uniqueId)
+    chatContainer.innerHTML += chatStripe(true, ' ', uniqueId)
 
     // to focus scroll to the bottom 
     chatContainer.scrollTop = chatContainer.scrollHeight;
@@ -86,7 +88,7 @@ const handleSubmit = async (e) => {
     // messageDiv.innerHTML = "..."
     loader(messageDiv)
 
-    const response = await fetch('https:locolhost:5000', {
+    const response = await fetch('https:locolhost:8000', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -97,7 +99,7 @@ const handleSubmit = async (e) => {
     })
 
     clearInterval(loadInterval)
-    messageDiv.innerHTML = " "
+    messageDiv.innerHTML = ' ';
 
     if (response.ok) {
         const data = await response.json();
@@ -114,7 +116,7 @@ const handleSubmit = async (e) => {
 
 form.addEventListener('submit', handleSubmit)
 form.addEventListener('keyup', (e) => {
-    if (e.keyCode === 13) {
-        handleSubmit(e)
+    if(e.keyCode === 13) {
+        handleSubmit(e);
     }
 })
